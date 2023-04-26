@@ -13,28 +13,50 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 
+const Title = () => (
+    <h1 id="heading" className="head" tabIndex="1">
+        Namaste React through JSX
+    </h1>
+)
+ 
+const title = (
+    <h1 id="heading" className="head" tabIndex="1">
+        Namaste React through React Element
+    </h1>
+);
+// console.log(Title)
 
-// const parent = React.createElement("div", {id:"parent"},[
-// React.createElement("div", {id:"child"},[
-// React.createElement("h1", {}, "I'm h1 tag"), 
-// React.createElement("h2", {}, "I'm h2 tag")]
-// ),
-// React.createElement("div", {id:"child2"},[
-//     React.createElement("h1", {}, "I'm h1 tag"), 
-//     React.createElement("h2", {}, "I'm h2 tag")]
-//     )]);
-// console.log(parent);
+// React Functional Component - a JS function that returns JSX/react element
+//  calling another component inside a component is called Component Discomposition
+const HeadingComponent = () => (
+    <div id="container">
+        <Title />
+        {title}
+        <Title></Title>
+        {Title()}
+        <h1>Namaste React through functional component</h1>
+    </div>  
+);
+// If we want more than one container div, we need to use a <React.Fragment></React.Fragment or <>(empty tags) since we know that a react component can have only one parent element
+const HeadingComponent1 = () => (
+    <>
+        <div id="container">
+            <Title />
+            {title}
+            <Title></Title>
+            {Title()}
+            <h1>Namaste React through functional component</h1>
+        </div>
+        <div id="container-2">
+            <h1>Another container using empty tags</h1>
+        </div>  
+    </>
+    
+);
 
-const heading = React.createElement("h1", {id:"heading"}, "Namaste React");
-console.log(heading);
-
-// JSX (transpiled before it reaches the JS) - Parcel - Babel
-// JAX => React.createElement => ReactElement - JS Object => HTML(render)
-// to write JSX in multiple lines, we need to wrap it inside ()
-
-
-const jsxHeading = <h1 id="heading" className="head" tabIndex="1">Namaste React through JSX</h1>;
-console.log(jsxHeading)
-
+// Another way to write
+// const HeadingComponent1 = () => <h1>Namaste React through functional component</h1>
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(jsxHeading);
+
+// Rendering a functional component
+root.render(<HeadingComponent1 />);
