@@ -1,3 +1,47 @@
-#heading{
-    color: red;
+/* Header CSS */
+.header {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
 }
+
+.logo{
+    width: 120px;
+}
+
+.nav-items > ul{
+    display: flex;
+    list-style-type: none;
+}
+
+.nav-items > ul > li{
+    padding: 10px;
+    margin: 10px;
+}
+
+.search{
+    padding: 10px;
+}
+
+/* RestaurantCard CSS */
+.res-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.res-card{
+    margin: 5px;
+    width: 160px;
+    height: 350px;
+    padding: 5px;
+}
+
+.res-card:hover{
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.res-logo{
+    width: 100%;
+}
+
