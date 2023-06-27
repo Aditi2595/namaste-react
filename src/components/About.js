@@ -22,7 +22,7 @@ class About extends Component{
                 <Outlet/>
                 {/* <ProfileFunctionalComponent name={"Aditi"}/> */}
                 <Profile name={"Child One"}/>
-                <Profile name={"Second Child"}/>
+                {/* <Profile name={"Second Child"}/> */}
             </div>
         )
     }

@@ -5,24 +5,35 @@ class Profile extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            count: 0,
-            count2: 0
+            userInfo: {
+                name: "Dummy Name"
+            }
         }
         console.log("Constructor" + this.props.name);
         //Cannot mutate
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         //API calls
+        
+        const data = await fetch("https://api.github.com/users/Aditi2595")
+        const json = await data.json();
+        this.setState ({
+            userInfo: json
+        })
         console.log("Component Did Mount" + this.props.name);
+        
+    }
+
+    componentDidUpdate() {
+        console.log("Child component did update")
     }
     render(){
         console.log("render" + this.props.name);
         return (
             <div>
                 <h1>This is a class base Profile page</h1>
-                <h2>Name: {this.props.name}</h2>
-                <h3>Count: {this.state.count}</h3>
+                <h2>Name: {this.state.userInfo.name}</h2>
                 {/* we donot mutate state directly */}
                 <button onClick={() => {
                     this.setState({
