@@ -4,15 +4,12 @@ import { useState } from "react";
 import { useEffect } from "react"
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom"
+import { filteredData } from "../utils/helper.js";
+import useOnline from "../utils/useOnline.js";
 
 // not using keys(not acceptable) <<<<< index as key(last option) <<<<<< unique id as key(best practice)
 
-function filteredData(searchText, listOfRestaurants){
-    const updatedList = listOfRestaurants.filter(
-        (restaurant) => restaurant.data.name.includes(searchText));
-    console.log(updatedList)
-    return updatedList
-}
+
 
 const Body = () => {
 
@@ -43,6 +40,12 @@ const Body = () => {
         setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards)
         setfilteredRestaurantList(json?.data?.cards[2]?.data?.data?.cards)
     }
+
+    const isOnline = useOnline();
+    if (!isOnline) {
+        return <h1>Oops! Please check your internet connection.</h1>
+    }
+
     return listOfRestaurants?.length === 0 ? (<Shimmer/>) : 
      (
     <>
