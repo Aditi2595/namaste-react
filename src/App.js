@@ -14,7 +14,7 @@
     - address
     - contact
  */
-import {React, lazy, Suspense} from "react"
+import {React, lazy, Suspense, useState} from "react"
 import ReactDOM from "react-dom/client"
 import Header from "./components/Header.js"
 import Body from "./components/Body.js"
@@ -25,14 +25,25 @@ import Contact from "./components/Contact.js"
 import RestaurantMenu from "./components/RestaurantMenu.js"
 import Profile from "./components/Profile.js"
 import Shimmer from "./components/Shimmer.js"
+import UserContext from "./utils/UserContext.js"
 
 const Instamart = lazy(() => import("./components/Instamart.js"))
 
 const AppLayout = () => {
+    const [user, setUser] = useState({
+        name: "Aditi Tewari",
+        email: "aditi@gmail.com"
+    })
     return (
         <div className="main-app">
-            <Header />
-            <Outlet />
+            <UserContext.Provider value={{
+                user: user,
+                setUser: setUser
+            }}>
+                <Header />
+                <Outlet />
+            </UserContext.Provider>
+            
         </div>
     )
     

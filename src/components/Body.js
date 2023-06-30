@@ -1,11 +1,12 @@
 import RestaurantCard from "./RestaurantCard.js";
 import { resObj } from "../utils/mockData.js";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react"
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom"
 import { filteredData } from "../utils/helper.js";
 import useOnline from "../utils/useOnline.js";
+import UserContext from "../utils/UserContext.js";
 
 // not using keys(not acceptable) <<<<< index as key(last option) <<<<<< unique id as key(best practice)
 
@@ -17,6 +18,8 @@ const Body = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState([])
     const [filteredRestaurantList, setfilteredRestaurantList] = useState([])
     const [searchText, setSearchText] = useState("")
+
+    const {user, setUser} = useContext(UserContext)
     //Normal JS Object
     //if we make an API call
     useEffect(() => {
@@ -54,6 +57,9 @@ const Body = () => {
                 <input type="text" placeholder='Search' value={searchText} onChange={(e) => {
                         setSearchText(e.target.value)
                 }}></input>
+                <input value={user.name} onChange={ e => setUser({name: e.target.value,
+                    email: "aditi@test.com"})
+                }></input>
                 <button className="search-btn" onClick={() => {
                     const updatedList = filteredData(searchText, listOfRestaurants)
                     setfilteredRestaurantList(updatedList)
@@ -68,7 +74,7 @@ const Body = () => {
                     Top Rated Restaurants</button>
             </div>
             
-            <div className="res-container">
+            <div className="flex flex-wrap">
                 {/* use map function to make it reusable component */}
                 
                 {
